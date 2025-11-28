@@ -20,4 +20,5 @@ export async function down(db: Kysely<unknown>) {
     const query = sql`
 drop table input;
 `;
+    await query.execute(db);
 }

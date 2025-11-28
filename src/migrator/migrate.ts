@@ -18,6 +18,7 @@ export async function migrate() {
         dialect: new PostgresDialect({
             pool: new Pool({
                 connectionString: dbUrl,
+                max: parseInt(process.env.DB_POOL_MAX_SIZE ?? '10')
             }),
         }),
     });
