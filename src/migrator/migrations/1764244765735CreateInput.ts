@@ -1,7 +1,7 @@
-import { Kysely, sql } from 'kysely';
+import { Kysely, sql } from "kysely";
 
 export async function up(db: Kysely<unknown>) {
-    const query = sql`
+  const query = sql`
 create table input(
     transaction_id text references transactions(id) on delete cascade on update cascade not null,
     index integer not null,
@@ -12,13 +12,13 @@ create table input(
     primary key(transaction_id, index)
 );
 create trigger set_timestamps_input before insert or update on input for each row execute procedure set_timestamps();
-`
-    await query.execute(db);
+`;
+  await query.execute(db);
 }
 
 export async function down(db: Kysely<unknown>) {
-    const query = sql`
+  const query = sql`
 drop table input;
 `;
-    await query.execute(db);
+  await query.execute(db);
 }

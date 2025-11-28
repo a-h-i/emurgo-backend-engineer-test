@@ -1,7 +1,7 @@
-import { Kysely, sql } from 'kysely';
+import { Kysely, sql } from "kysely";
 
 export async function up(db: Kysely<unknown>) {
-    const query = sql`
+  const query = sql`
 
 create table transactions(
     id text not null unique,
@@ -12,12 +12,12 @@ create table transactions(
 );
 create trigger set_timestamps_transactions before insert or update on transactions for each row execute procedure set_timestamps();
 `;
-    await query.execute(db);
+  await query.execute(db);
 }
 
 export async function down(db: Kysely<unknown>) {
-    const query = sql`
+  const query = sql`
 drop table transactions;
 `;
-    await query.execute(db);
+  await query.execute(db);
 }
