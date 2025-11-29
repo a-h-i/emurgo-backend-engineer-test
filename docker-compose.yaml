@@ -12,8 +12,6 @@ services:
         - CMD-SHELL
         - pg_isready
       timeout: 5s
-    volumes:
-      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
@@ -48,5 +46,3 @@ services:
     environment:
       DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
 
-volumes:
-  db_data:
