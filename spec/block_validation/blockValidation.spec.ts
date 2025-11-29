@@ -220,6 +220,10 @@ describe("block outputs and inputs matching", () => {
               address: "address1",
               value: 10,
             },
+            {
+              address: "address2",
+              value: 90,
+            },
           ],
         },
       ],

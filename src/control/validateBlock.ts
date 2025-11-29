@@ -53,7 +53,7 @@ export async function areOutputsAndInputsMatching(
     const outputsSum = tx.outputs
       .map((output) => BigInt(output.value))
       .reduce((acc, value) => acc + value, BigInt(0));
-    if (outputsSum > matchingOutputsSum) {
+    if (outputsSum !== matchingOutputsSum) {
       return false;
     }
   }

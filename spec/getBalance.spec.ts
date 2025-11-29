@@ -1,7 +1,7 @@
 import { expect, test, beforeEach, afterAll } from "bun:test";
 import { createDB } from "../src/db";
 import { sql } from "kysely";
-import { app } from "../src";
+import app from "../src";
 
 afterAll(async () => {
   const db = createDB();
