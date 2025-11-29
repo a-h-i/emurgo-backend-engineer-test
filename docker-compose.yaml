@@ -45,4 +45,3 @@ services:
         condition: service_completed_successfully
     environment:
       DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
-
