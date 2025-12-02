@@ -7,8 +7,10 @@ import {
   BlockSchema,
   isValidBlockId,
   isValidHeight,
+  ingestBlock,
+  rollbackLatest,
 } from "./control";
-import { ingestBlock } from "./control/ingestBlock.ts";
+import { z } from "zod";
 const app = new Hono();
 
 app.get("/balance/:address", async (c) => {
@@ -36,6 +38,20 @@ app.post("/blocks", zValidator("json", BlockSchema), async (c) => {
     applyBalances,
   );
   return c.json(result, result.status);
+});
+
+const RollbackSchema = z.object({
+  height: z.number().min(1).max(2000),
+});
+
+app.post("/rollback", zValidator("query", RollbackSchema), async (c) => {
+  const requestedHeight = c.req.valid("query").height;
+  for (let i = requestedHeight; i > 0; i--) {
+    await rollbackLatest();
+  }
+  return c.json({
+    message: `Rollback to height ${requestedHeight} successful`,
+  });
 });
 
 export default app;
